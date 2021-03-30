@@ -8,7 +8,7 @@ export default class App extends PureComponent {
 			list: [],
 		}
 	}
-	//
+	//hhhhh
 	render() {
 		let { inputValue, list } = this.state
 		return (
