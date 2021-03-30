@@ -71,6 +71,7 @@ export default class App extends PureComponent {
 		})
 	}
 	handleItemDelete(index) {
+		console.log(1233)
 		const list = [...this.state.list]
 		list.splice(index, 1)
 		this.setState({
