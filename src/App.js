@@ -33,7 +33,7 @@ export default class App extends PureComponent {
 						return (
 							<Fragment>
 								<div>
-									<li key={index} style={{ display: 'inline-block' }}>
+									<li key={item} style={{ display: 'inline-block' }}>
 										{item}
 									</li>
 									<button
@@ -54,14 +54,18 @@ export default class App extends PureComponent {
 	handleClick(e) {
 		let value = this.state.inputValue
 		if (value.trim().length === 0) {
-			this.setState({
-				inputValue: '',
-			})
+			this.setState(
+				(preState, props) => ({ inputValue: '' }),
+				() => {}
+			)
 		} else {
-			this.setState({
-				list: [...this.state.list, this.state.inputValue],
-				inputValue: '',
-			})
+			this.setState(
+				(preState, props) => ({
+					list: [...preState.list, preState.inputValue],
+					inputValue: '',
+				}),
+				() => {}
+			)
 		}
 	}
 	handleChange(e) {
@@ -72,8 +76,9 @@ export default class App extends PureComponent {
 	handleItemDelete(index) {
 		const list = [...this.state.list]
 		list.splice(index, 1)
-		this.setState({
-			list,
-		})
+		this.setState(
+			(preState, props) => ({ list }),
+			() => {}
+		)
 	}
 }
