@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
-
+import axios from 'axios'
 export default class App extends PureComponent {
 	constructor(props) {
 		super(props)
@@ -50,6 +50,19 @@ export default class App extends PureComponent {
 				</ul>
 			</Fragment>
 		)
+	}
+	componentDidMount() {
+		axios
+			.get('/api/todolist')
+			.then(res => { 
+				this.setState(
+					(preState, props) => ({ list: [...res.data] }),
+					() => {}
+				)
+			})
+			.catch(err => {
+				console.error(err)
+			})
 	}
 	handleClick(e) {
 		let value = this.state.inputValue
