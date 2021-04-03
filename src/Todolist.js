@@ -1,20 +1,12 @@
 import React, { PureComponent } from 'react'
 import 'antd/dist/antd.css'
 import { Input, Button, List } from 'antd'
-const data = [
-	'Racing car sprays burning fuel into crowd.',
-	'Japanese princess to wed commoner.',
-	'Australian walks 100km after outback crash.',
-	'Man charged over missing wedding girl.',
-	'Los Angeles battles huge wildfires.',
-]
+import store from './store/index'
 export default class Todolist extends PureComponent {
 	constructor(props) {
 		super(props)
-		this.state = {
-			list: [...data],
-			value: '',
-		}
+		this.state = store.getState()
+		store.subscribe(this.handleStore)
 	}
 
 	render() {
@@ -23,17 +15,10 @@ export default class Todolist extends PureComponent {
 				<Input
 					placeholder="Todo info"
 					style={{ width: 300, margin: 10 }}
-					onChange={e => {
-						this.handleChange(e)
-					}}
-					value={this.state.value}
+					value={this.state.inputValue}
+					onChange={this.handleChange}
 				/>
-				<Button
-					type="primary"
-					onClick={e => {
-						this.handleClick()
-					}}
-				>
+				<Button type="primary" onClick={this.handleClick}>
 					提交
 				</Button>
 				<List
@@ -41,23 +26,30 @@ export default class Todolist extends PureComponent {
 					size="small"
 					bordered
 					dataSource={this.state.list}
-					renderItem={item => <List.Item>{item}</List.Item>}
+					renderItem={(item, index) => (
+						<List.Item onClick={this.handleItemClick.bind(this, index)}>
+							{item}
+						</List.Item>
+					)}
 				/>
 			</div>
 		)
 	}
-	handleChange(e) {
-		this.setState(
-			(preState, props) => ({ value: e.target.value }),
-			() => {}
-		)
+	handleChange = e => {
+		const action = { type: 'on_change_value', value: e.target.value }
+		store.dispatch(action)
 	}
-	handleClick() {
+	handleClick = e => {
+		const action = { type: 'add_input_list', value: this.state.inputValue }
+		store.dispatch(action)
+	}
+	handleItemClick = index => {
+		const action = { type: 'delete_list_item', index }
+		store.dispatch(action)
+	}
+	handleStore = () => {
 		this.setState(
-			(preState, props) => ({
-				list: [...preState.list, preState.value],
-				value: '',
-			}),
+			(preState, props) => store.getState(),
 			() => {}
 		)
 	}
