@@ -10,9 +10,6 @@ export const HeaderWrapper = styled.div`
 export const Logo = styled.a.attrs({
 	href: '/',
 })`
-	/* position: absolute;
-	left: 23.5rem;
-	top: 0; */
 	display: inline-block;
 	width: 10rem;
 	height: 5.6rem;
@@ -41,6 +38,9 @@ export const NavItem = styled.div`
 	&.right {
 		float: right;
 		color: #969696;
+		.iconfont {
+			font-size: 2.4rem;
+		}
 	}
 	&.active {
 		color: #ea6f5a;
