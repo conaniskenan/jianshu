@@ -107,6 +107,62 @@ export const Addition = styled.div`
 	height: 5.6rem;
 	line-height: 5.6rem;
 `
+export const SearchInfo = styled.div`
+	position: absolute;
+	left: 2rem;
+	top: 5.6rem;
+	width: 24rem;
+	margin-top: 1rem;
+	padding: 0 2rem 2rem 2rem;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+	background-color: #fff;
+	&.hide {
+		display: none;
+	}
+	&::before {
+		content: '热门搜索';
+		color: #a3a3a3;
+		font-size: 1.4rem;
+		font-weight: bold;
+	}
+`
+export const SearchInfoItem = styled.a.attrs({ href: '#' })`
+	display: block;
+	float: left;
+	padding: 0 0.6rem;
+	line-height: 2.5rem;
+	font-size: 1.3rem;
+	color: #787878;
+	text-decoration: none;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	margin: 0.6rem 0.7rem;
+`
+export const SearchChange = styled.div`
+	position: absolute;
+	right: 2rem;
+	top: 0;
+	color: #a3a3a3;
+	font-size: 1.4rem;
+	font-weight: bold;
+	text-decoration: none;
+	.iconfont {
+		position: absolute;
+		right: 3.8rem;
+		top: 2.8rem;
+		font-size: 1.6rem;
+		font-weight: normal;
+	}
+`
+export const Triangle = styled.div`
+	width: 0;
+	height: 0;
+	border: 1rem solid transparent;
+	border-bottom: 1.3rem solid #fff;
+	position: absolute;
+	left: 2.2rem;
+	top: -2.3rem;
+`
 export const Button = styled.span`
 	display: inline-block;
 	border-radius: 1.9rem;
